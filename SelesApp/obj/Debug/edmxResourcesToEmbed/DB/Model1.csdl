@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SelesAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AllProduct">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PurchPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SellingPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryID" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_AllProduct_Category" FromRole="AllProduct" ToRole="Category" />
+    <NavigationProperty Name="PurchBillDetails" Relationship="Self.FK_PurchBillDetails_AllProduct" FromRole="AllProduct" ToRole="PurchBillDetails" />
+    <NavigationProperty Name="SelesBillDetails" Relationship="Self.FK_SelesBillDetails_AllProduct" FromRole="AllProduct" ToRole="SelesBillDetails" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AllProducts" Relationship="Self.FK_AllProduct_Category" FromRole="Category" ToRole="AllProduct" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalDebt" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="CustomerDebts" Relationship="Self.FK_CustomerDebt_Customer" FromRole="Customer" ToRole="CustomerDebt" />
+    <NavigationProperty Name="SelesBills" Relationship="Self.FK_SelesBill_Customer" FromRole="Customer" ToRole="SelesBill" />
+  </EntityType>
+  <EntityType Name="CustomerDebt">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateTime" Type="DateTime" Precision="3" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="KindOfOP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TotalResult" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerDebt_Customer" FromRole="CustomerDebt" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="PurchBill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SupplerID" Type="Int32" />
+    <Property Name="TotalOfBill" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TotalAfterDiscount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Suppler" Relationship="Self.FK_PurchBill_Suppler" FromRole="PurchBill" ToRole="Suppler" />
+    <NavigationProperty Name="User" Relationship="Self.FK_PurchBill_Users" FromRole="PurchBill" ToRole="Users" />
+    <NavigationProperty Name="PurchBillDetails" Relationship="Self.FK_PurchBillDetails_PurchBill" FromRole="PurchBill" ToRole="PurchBillDetails" />
+  </EntityType>
+  <EntityType Name="PurchBillDetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="ProdID" Type="Int32" />
+    <Property Name="PurchBillID" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="TotalSub" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AllProduct" Relationship="Self.FK_PurchBillDetails_AllProduct" FromRole="PurchBillDetails" ToRole="AllProduct" />
+    <NavigationProperty Name="PurchBill" Relationship="Self.FK_PurchBillDetails_PurchBill" FromRole="PurchBillDetails" ToRole="PurchBill" />
+  </EntityType>
+  <EntityType Name="SelesBill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="TotalOfBill" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TotalAfterDiscount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_SelesBill_Customer" FromRole="SelesBill" ToRole="Customer" />
+    <NavigationProperty Name="User" Relationship="Self.FK_SelesBill_Users" FromRole="SelesBill" ToRole="Users" />
+    <NavigationProperty Name="SelesBillDetails" Relationship="Self.FK_SelesBillDetails_SelesBill" FromRole="SelesBill" ToRole="SelesBillDetails" />
+  </EntityType>
+  <EntityType Name="SelesBillDetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="ProdID" Type="Int32" />
+    <Property Name="SelesBillID" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="TotalSub" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AllProduct" Relationship="Self.FK_SelesBillDetails_AllProduct" FromRole="SelesBillDetails" ToRole="AllProduct" />
+    <NavigationProperty Name="SelesBill" Relationship="Self.FK_SelesBillDetails_SelesBill" FromRole="SelesBillDetails" ToRole="SelesBill" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NameOfPill" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneOfBill" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Suppler">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalDebt" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="PurchBills" Relationship="Self.FK_PurchBill_Suppler" FromRole="Suppler" ToRole="PurchBill" />
+    <NavigationProperty Name="SupplerDebts" Relationship="Self.FK_SupplerDebt_Suppler" FromRole="Suppler" ToRole="SupplerDebt" />
+  </EntityType>
+  <EntityType Name="SupplerDebt">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateTime" Type="DateTime" Precision="3" />
+    <Property Name="SupplerID" Type="Int32" />
+    <Property Name="KindOfOP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TotalResult" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Suppler" Relationship="Self.FK_SupplerDebt_Suppler" FromRole="SupplerDebt" ToRole="Suppler" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PurchBills" Relationship="Self.FK_PurchBill_Users" FromRole="Users" ToRole="PurchBill" />
+    <NavigationProperty Name="SelesBills" Relationship="Self.FK_SelesBill_Users" FromRole="Users" ToRole="SelesBill" />
+  </EntityType>
+  <Association Name="FK_AllProduct_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="AllProduct" Type="Self.AllProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="AllProduct">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchBillDetails_AllProduct">
+    <End Role="AllProduct" Type="Self.AllProduct" Multiplicity="0..1" />
+    <End Role="PurchBillDetails" Type="Self.PurchBillDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AllProduct">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PurchBillDetails">
+        <PropertyRef Name="ProdID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelesBillDetails_AllProduct">
+    <End Role="AllProduct" Type="Self.AllProduct" Multiplicity="0..1" />
+    <End Role="SelesBillDetails" Type="Self.SelesBillDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AllProduct">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SelesBillDetails">
+        <PropertyRef Name="ProdID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerDebt_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="CustomerDebt" Type="Self.CustomerDebt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CustomerDebt">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelesBill_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="SelesBill" Type="Self.SelesBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SelesBill">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchBill_Suppler">
+    <End Role="Suppler" Type="Self.Suppler" Multiplicity="0..1" />
+    <End Role="PurchBill" Type="Self.PurchBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppler">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PurchBill">
+        <PropertyRef Name="SupplerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchBill_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="PurchBill" Type="Self.PurchBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PurchBill">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchBillDetails_PurchBill">
+    <End Role="PurchBill" Type="Self.PurchBill" Multiplicity="0..1" />
+    <End Role="PurchBillDetails" Type="Self.PurchBillDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchBill">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PurchBillDetails">
+        <PropertyRef Name="PurchBillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelesBill_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="SelesBill" Type="Self.SelesBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SelesBill">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelesBillDetails_SelesBill">
+    <End Role="SelesBill" Type="Self.SelesBill" Multiplicity="0..1" />
+    <End Role="SelesBillDetails" Type="Self.SelesBillDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SelesBill">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SelesBillDetails">
+        <PropertyRef Name="SelesBillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplerDebt_Suppler">
+    <End Role="Suppler" Type="Self.Suppler" Multiplicity="0..1" />
+    <End Role="SupplerDebt" Type="Self.SupplerDebt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppler">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SupplerDebt">
+        <PropertyRef Name="SupplerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SelesAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AllProducts" EntityType="Self.AllProduct" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="CustomerDebts" EntityType="Self.CustomerDebt" />
+    <EntitySet Name="PurchBills" EntityType="Self.PurchBill" />
+    <EntitySet Name="PurchBillDetails" EntityType="Self.PurchBillDetail" />
+    <EntitySet Name="SelesBills" EntityType="Self.SelesBill" />
+    <EntitySet Name="SelesBillDetails" EntityType="Self.SelesBillDetail" />
+    <EntitySet Name="Settings" EntityType="Self.Setting" />
+    <EntitySet Name="Supplers" EntityType="Self.Suppler" />
+    <EntitySet Name="SupplerDebts" EntityType="Self.SupplerDebt" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_AllProduct_Category" Association="Self.FK_AllProduct_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="AllProduct" EntitySet="AllProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchBillDetails_AllProduct" Association="Self.FK_PurchBillDetails_AllProduct">
+      <End Role="AllProduct" EntitySet="AllProducts" />
+      <End Role="PurchBillDetails" EntitySet="PurchBillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelesBillDetails_AllProduct" Association="Self.FK_SelesBillDetails_AllProduct">
+      <End Role="AllProduct" EntitySet="AllProducts" />
+      <End Role="SelesBillDetails" EntitySet="SelesBillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerDebt_Customer" Association="Self.FK_CustomerDebt_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="CustomerDebt" EntitySet="CustomerDebts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelesBill_Customer" Association="Self.FK_SelesBill_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="SelesBill" EntitySet="SelesBills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchBill_Suppler" Association="Self.FK_PurchBill_Suppler">
+      <End Role="Suppler" EntitySet="Supplers" />
+      <End Role="PurchBill" EntitySet="PurchBills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchBill_Users" Association="Self.FK_PurchBill_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PurchBill" EntitySet="PurchBills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchBillDetails_PurchBill" Association="Self.FK_PurchBillDetails_PurchBill">
+      <End Role="PurchBill" EntitySet="PurchBills" />
+      <End Role="PurchBillDetails" EntitySet="PurchBillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelesBill_Users" Association="Self.FK_SelesBill_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SelesBill" EntitySet="SelesBills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelesBillDetails_SelesBill" Association="Self.FK_SelesBillDetails_SelesBill">
+      <End Role="SelesBill" EntitySet="SelesBills" />
+      <End Role="SelesBillDetails" EntitySet="SelesBillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplerDebt_Suppler" Association="Self.FK_SupplerDebt_Suppler">
+      <End Role="Suppler" EntitySet="Supplers" />
+      <End Role="SupplerDebt" EntitySet="SupplerDebts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

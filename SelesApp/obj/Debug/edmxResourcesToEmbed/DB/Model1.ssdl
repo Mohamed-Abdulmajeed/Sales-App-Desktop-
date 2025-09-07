@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SelesAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AllProduct">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="PurchPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="SellingPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="CategoryID" Type="int" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Company" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="TotalDebt" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="CustomerDebt">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="KindOfOP" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="TotalResult" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="PurchBill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="50" />
+    <Property Name="SupplerID" Type="int" />
+    <Property Name="TotalOfBill" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="TotalAfterDiscount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="PurchBillDetails">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="ProdID" Type="int" />
+    <Property Name="PurchBillID" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="TotalSub" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SelesBill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="50" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="TotalOfBill" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="TotalAfterDiscount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="SelesBillDetails">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="ProdID" Type="int" />
+    <Property Name="SelesBillID" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="TotalSub" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NameOfPill" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneOfBill" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Suppler">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Company" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="TotalDebt" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="SupplerDebt">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" />
+    <Property Name="SupplerID" Type="int" />
+    <Property Name="KindOfOP" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="TotalResult" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_AllProduct_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="AllProduct" Type="Self.AllProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="AllProduct">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerDebt_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="CustomerDebt" Type="Self.CustomerDebt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CustomerDebt">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchBill_Suppler">
+    <End Role="Suppler" Type="Self.Suppler" Multiplicity="0..1" />
+    <End Role="PurchBill" Type="Self.PurchBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppler">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PurchBill">
+        <PropertyRef Name="SupplerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchBill_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="PurchBill" Type="Self.PurchBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PurchBill">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchBillDetails_AllProduct">
+    <End Role="AllProduct" Type="Self.AllProduct" Multiplicity="0..1" />
+    <End Role="PurchBillDetails" Type="Self.PurchBillDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AllProduct">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PurchBillDetails">
+        <PropertyRef Name="ProdID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchBillDetails_PurchBill">
+    <End Role="PurchBill" Type="Self.PurchBill" Multiplicity="0..1" />
+    <End Role="PurchBillDetails" Type="Self.PurchBillDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchBill">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PurchBillDetails">
+        <PropertyRef Name="PurchBillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelesBill_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="SelesBill" Type="Self.SelesBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SelesBill">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelesBill_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="SelesBill" Type="Self.SelesBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SelesBill">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelesBillDetails_AllProduct">
+    <End Role="AllProduct" Type="Self.AllProduct" Multiplicity="0..1" />
+    <End Role="SelesBillDetails" Type="Self.SelesBillDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AllProduct">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SelesBillDetails">
+        <PropertyRef Name="ProdID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelesBillDetails_SelesBill">
+    <End Role="SelesBill" Type="Self.SelesBill" Multiplicity="0..1" />
+    <End Role="SelesBillDetails" Type="Self.SelesBillDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SelesBill">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SelesBillDetails">
+        <PropertyRef Name="SelesBillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplerDebt_Suppler">
+    <End Role="Suppler" Type="Self.Suppler" Multiplicity="0..1" />
+    <End Role="SupplerDebt" Type="Self.SupplerDebt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppler">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SupplerDebt">
+        <PropertyRef Name="SupplerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SelesAppModelStoreContainer">
+    <EntitySet Name="AllProduct" EntityType="Self.AllProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerDebt" EntityType="Self.CustomerDebt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PurchBill" EntityType="Self.PurchBill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PurchBillDetails" EntityType="Self.PurchBillDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SelesBill" EntityType="Self.SelesBill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SelesBillDetails" EntityType="Self.SelesBillDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Suppler" EntityType="Self.Suppler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupplerDebt" EntityType="Self.SupplerDebt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AllProduct_Category" Association="Self.FK_AllProduct_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="AllProduct" EntitySet="AllProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerDebt_Customer" Association="Self.FK_CustomerDebt_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="CustomerDebt" EntitySet="CustomerDebt" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchBill_Suppler" Association="Self.FK_PurchBill_Suppler">
+      <End Role="Suppler" EntitySet="Suppler" />
+      <End Role="PurchBill" EntitySet="PurchBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchBill_Users" Association="Self.FK_PurchBill_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PurchBill" EntitySet="PurchBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchBillDetails_AllProduct" Association="Self.FK_PurchBillDetails_AllProduct">
+      <End Role="AllProduct" EntitySet="AllProduct" />
+      <End Role="PurchBillDetails" EntitySet="PurchBillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchBillDetails_PurchBill" Association="Self.FK_PurchBillDetails_PurchBill">
+      <End Role="PurchBill" EntitySet="PurchBill" />
+      <End Role="PurchBillDetails" EntitySet="PurchBillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelesBill_Customer" Association="Self.FK_SelesBill_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="SelesBill" EntitySet="SelesBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelesBill_Users" Association="Self.FK_SelesBill_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SelesBill" EntitySet="SelesBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelesBillDetails_AllProduct" Association="Self.FK_SelesBillDetails_AllProduct">
+      <End Role="AllProduct" EntitySet="AllProduct" />
+      <End Role="SelesBillDetails" EntitySet="SelesBillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelesBillDetails_SelesBill" Association="Self.FK_SelesBillDetails_SelesBill">
+      <End Role="SelesBill" EntitySet="SelesBill" />
+      <End Role="SelesBillDetails" EntitySet="SelesBillDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplerDebt_Suppler" Association="Self.FK_SupplerDebt_Suppler">
+      <End Role="Suppler" EntitySet="Suppler" />
+      <End Role="SupplerDebt" EntitySet="SupplerDebt" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
